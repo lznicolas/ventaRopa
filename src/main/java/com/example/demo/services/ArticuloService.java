@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.models.Articulo;
 import com.example.demo.repositories.ArticuloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,18 +13,25 @@ public class ArticuloService {
     @Autowired
     private ArticuloRepository articuloRepository;
 
+    @Value("${constants.alicuotaEspecial}")
+    Double alicuota;
+
     private Double netoGrabado;
     private Double impuestoValorAgregado;
     private Double precioVenta;
 
 
+
     //Crear el Articulo
 
-    public void crearArticulo(String descripcion, Double costo, Double margenDeGanancia){
-        netoGrabado = costo + (costo*margenDeGanancia);
-        impuestoValorAgregado = netoGrabado*0.21;
+    public void crearArticulo(Articulo articulo){
+
+        netoGrabado = articulo.getCosto() + (articulo.getCosto()*articulo.getMargenDeGanancia());
+        impuestoValorAgregado = netoGrabado*alicuota;
         precioVenta = impuestoValorAgregado + netoGrabado;
-        Articulo articulo = new Articulo(descripcion,costo,margenDeGanancia,netoGrabado,impuestoValorAgregado,precioVenta);
+        articulo.setNetoGrabado(netoGrabado);
+        articulo.setImpuestoValorAgregado(impuestoValorAgregado);
+        articulo.setPrecioDeVenta(precioVenta);
         articuloRepository.save(articulo);
     }
 
