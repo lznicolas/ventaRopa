@@ -20,11 +20,13 @@ public class Articulo {
     private long id;
     private String descripcion;
     private Double costo;
+    private Marca marca;
     private Double margenDeGanancia;
     private Double netoGrabado;
     private Double impuestoValorAgregado;
     private Double precioDeVenta;
 
+/*
     public Articulo( String descripcion, Double costo, Double margenDeGanancia, Double netoGrabado, Double impuestoValorAgregado, Double precioDeVenta) {
         //this.id = id;
         this.descripcion = descripcion;
@@ -116,4 +118,6 @@ public class Articulo {
     public int hashCode() {
         return Objects.hash(id, descripcion);
     }
+
+ */
 }
