@@ -1,9 +1,6 @@
 package com.example.demo.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,15 +13,21 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Articulo {
     @Id
+    @Column(name = "articulo_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String descripcion;
     private Double costo;
+    @ManyToOne
+    @JoinColumn(name = "marca_id")
     private Marca marca;
     private Double margenDeGanancia;
     private Double netoGrabado;
     private Double impuestoValorAgregado;
     private Double precioDeVenta;
+    @ManyToOne
+    @JoinColumn(name = "articulo_id")
+    private Talle talle;
 
 /*
     public Articulo( String descripcion, Double costo, Double margenDeGanancia, Double netoGrabado, Double impuestoValorAgregado, Double precioDeVenta) {

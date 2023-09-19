@@ -5,16 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Marca {
+public class Talle {
     @Id
-    @Column(name = "marca_id")
+    @Column(name = "talle_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String marca;
+    private String descripcion;
+
 }
