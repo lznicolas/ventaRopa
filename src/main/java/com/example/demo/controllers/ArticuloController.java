@@ -1,11 +1,8 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Articulo;
-import com.example.demo.repositories.ArticuloRepository;
 import com.example.demo.services.ArticuloService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -28,6 +28,8 @@ public class Articulo {
     @ManyToOne
     @JoinColumn(name = "articulo_id")
     private Talle talle;
+    private Categoria categoria;
+    private Color color;
 
 /*
     public Articulo( String descripcion, Double costo, Double margenDeGanancia, Double netoGrabado, Double impuestoValorAgregado, Double precioDeVenta) {
