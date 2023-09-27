@@ -1,16 +1,17 @@
-package com.example.demo.services;
+package com.example.demo.services.implementations;
 
 import com.example.demo.models.Articulo;
 import com.example.demo.repositories.ArticuloRepository;
+import com.example.demo.services.contracts.ArticuloDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.Optional;
 
 @Service
-public class ArticuloService {
+public class ArticuloService implements ArticuloDAO {
     @Autowired
     private ArticuloRepository articuloRepository;
 
@@ -35,31 +36,39 @@ public class ArticuloService {
         return precioVenta;
     }
 
-    //-----------------Listar Articulos ------------------------
-    public Articulo obtenerArticulo(Long  id){
-        return articuloRepository.findById(id).orElse(null);
-    }
 
     //----------------Buscar un Articulo con su id -------------
-    public List<Articulo> listarArticulos(){
-        return articuloRepository.findAll();
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Articulo> findById(Long id) {
+        return Optional.empty();
     }
-
     //----------------Crear Articulo ---------------------------
-    public void crearArticulo(Articulo articulo){
+    @Override
+    @Transactional
+    public Articulo save(Articulo articulo) {
         articulo.setNetoGrabado(calculaNetograbado(articulo));
         articulo.setImpuestoValorAgregado(calculaImpuestoValorAgregado(articulo));
         articulo.setPrecioDeVenta(calculaPrecioVenta(articulo));
-        articuloRepository.save(articulo);
+        return articuloRepository.save(articulo);
     }
 
+
+    //-----------------Listar Articulos ------------------------
+    @Override
+    @Transactional(readOnly = true)
+    public Iterable<Articulo> findAll(){
+        return articuloRepository.findAll();
+    }
     //------------Borrar Articulo ----------------------------
-    public void borrarArticulo(Long id){
-        articuloRepository.deleteAllById(Collections.singleton(id));
-    }
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
 
+    }
     //----------Modificar Articulo ---------------------------
-    public void actualizaArticulo(Long id, Articulo articulo){
+    @Override
+    public Articulo actualiza(Long id, Articulo articulo) {
         Articulo articuloActualizado = articuloRepository.findById(id).get();
         articuloActualizado.setDescripcion(articulo.getDescripcion());
         articuloActualizado.setCosto(articulo.getCosto());
@@ -68,6 +77,8 @@ public class ArticuloService {
         articuloActualizado.setNetoGrabado(calculaNetograbado(articuloActualizado));
         articuloActualizado.setImpuestoValorAgregado(calculaImpuestoValorAgregado(articuloActualizado));
         articuloActualizado.setPrecioDeVenta(calculaPrecioVenta(articuloActualizado));
-        articuloRepository.save(articuloActualizado);
+        return articuloRepository.save(articuloActualizado);
     }
+
+
 }

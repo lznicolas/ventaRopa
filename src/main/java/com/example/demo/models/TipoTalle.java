@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -15,4 +17,10 @@ public class TipoTalle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descripcionTipoT;
+    @OneToMany(
+            mappedBy = "TipoTalle",
+            fetch = FetchType.LAZY
+    )
+    private Set<Talle> talle;
+
 }

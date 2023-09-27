@@ -1,4 +1,4 @@
-package com.example.demo.services;
+package com.example.demo.services.implementations;
 
 import com.example.demo.models.Articulo;
 import com.example.demo.models.Marca;

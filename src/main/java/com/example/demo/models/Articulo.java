@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Data
@@ -25,12 +26,19 @@ public class Articulo {
     private Double netoGrabado;
     private Double impuestoValorAgregado;
     private Double precioDeVenta;
+    @OneToMany(
+            mappedBy = "articulo",
+            fetch = FetchType.LAZY
+    )
+    private Set<Talle> talle;
     @ManyToOne
-    @JoinColumn(name = "articulo_id")
-    private Talle talle;
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
-    private Color color;
-
+    @OneToMany(
+            mappedBy = "articulo",
+            fetch = FetchType.LAZY
+    )
+    private Set<Color> color;
 /*
     public Articulo( String descripcion, Double costo, Double margenDeGanancia, Double netoGrabado, Double impuestoValorAgregado, Double precioDeVenta) {
         //this.id = id;

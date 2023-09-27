@@ -15,5 +15,14 @@ public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long cantidad;
+    @ManyToOne
+    @JoinColumn(name = "color_id")
+    private Color color;
+    @ManyToOne
+    @JoinColumn(name = "articulo_id")
+    private Articulo articulo;
+    @ManyToOne
+    @JoinColumn(name = "talle_id")
+    private Talle talle;
 
 }

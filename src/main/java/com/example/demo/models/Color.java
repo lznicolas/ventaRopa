@@ -16,4 +16,5 @@ public class Color {
     private Long id;
     private String descripcion;
 
+
 }

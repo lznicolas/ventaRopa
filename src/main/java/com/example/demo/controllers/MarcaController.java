@@ -1,9 +1,8 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.models.Articulo;
 import com.example.demo.models.Marca;
-import com.example.demo.services.MarcaService;
+import com.example.demo.services.implementations.MarcaService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

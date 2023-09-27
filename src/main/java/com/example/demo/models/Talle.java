@@ -15,5 +15,8 @@ public class Talle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descripcion;
+    @ManyToOne
+    @JoinColumn(name="tipo_talle_id")
+    private TipoTalle tipoTalle;
 
 }

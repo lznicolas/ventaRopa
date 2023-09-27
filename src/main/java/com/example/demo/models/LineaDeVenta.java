@@ -16,5 +16,8 @@ public class LineaDeVenta {
     private Long id;
     private Integer cantidad;
     private Float subtotal;
+    @ManyToOne
+    @JoinColumn(name = "articulo_id")
+    private Articulo articulo;
 
 }
