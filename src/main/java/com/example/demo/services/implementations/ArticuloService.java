@@ -80,5 +80,4 @@ public class ArticuloService implements ArticuloDAO {
         return articuloRepository.save(articuloActualizado);
     }
 
-
 }
