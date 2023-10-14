@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 
+import com.example.demo.models.Articulo;
 import com.example.demo.models.Marca;
 import com.example.demo.services.implementations.MarcaService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/marca")
@@ -24,34 +26,31 @@ public class MarcaController {
 
     //---------Listado de Marca ------------------------
     @GetMapping("/lista")
-    public List<Marca> listarMarcas(){
-        return marcaService.listarMarcas();
+    public Iterable<Marca> findAll(){
+        return marcaService.findAll();
     }
 
     //--------Muestra una Marca ------------------------
     @GetMapping("/lista/{id}")
-    public Marca obtenerMarca(@PathVariable Long id){
-        return marcaService.obtenerMarca(id);
+    public Optional<Marca> obtenerMarca(@PathVariable Long id){
+        return marcaService.findById(id);
     }
 
-    //--------Crea Marca -------------------------------
+    //--------Crear Marca -------------------------------
     @PostMapping("/nuevamarca")
     @ResponseBody
-    public HttpStatus creaArticulo(HttpEntity<String> request) throws JsonProcessingException {
-        marcaService.crearMarca(mapper.readValue(request.getBody(),Marca.class));
-        return HttpStatus.OK;
-
-        //articuloService.crearArticulo(descripcion,costo,margenDeGanancia);
+    public Marca crearMarca(Marca marca){
+        return marcaService.save(marca);
     }
 
     @DeleteMapping("/borrar/{id}")
     public void borrarMarca(@PathVariable Long id){
-        marcaService.borrarMarca(id);
+        marcaService.deleteById(id);
     }
 
     @PutMapping("/actualiza/{id}")
     public void actualizaMarca(@PathVariable Long id, @RequestBody Marca marca){
-        marcaService.actualizaMarca(id, marca);
+        marcaService.actualiza(id, marca);
     }
 
 }

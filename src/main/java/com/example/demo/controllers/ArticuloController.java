@@ -45,24 +45,44 @@ public class ArticuloController {
     public Articulo save(Articulo articulo){
         return articuloService.save(articulo);
     }
-    /*public HttpStatus creaArticulo(HttpEntity<String> request) throws JsonProcessingException {
+
+
+    @DeleteMapping("/borrar/{id}")
+    public void borrarArticulo(@PathVariable Long id){
+        articuloService.deleteById(id);
+    }
+
+    @PutMapping("/actualiza/{id}")
+    public Articulo actualizaArticulo(@PathVariable Long id, @RequestBody Articulo articulo){
+       return articuloService.actualiza(id, articulo);
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /*public HttpStatus creaArticulo(HttpEntity<String> request) throws JsonProcessingException {
         //articuloService.crearArticulo(gson.fromJson(request.getBody(),Articulo.class));
         articuloService.crearArticulo(mapper.readValue(request.getBody(),Articulo.class));
         return HttpStatus.OK;
 
         //articuloService.crearArticulo(descripcion,costo,margenDeGanancia);
     }*/
-
-    @DeleteMapping("/borrar/{id}")
-    public void borrarArticulo(@PathVariable Long id){
-        articuloService.borrarArticulo(id);
-    }
-
-    @PutMapping("/actualiza/{id}")
-    public void actualizaArticulo(@PathVariable Long id, @RequestBody Articulo articulo){
-        articuloService.actualizaArticulo(id, articulo);
-    }
-
-
-
-}
