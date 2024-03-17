@@ -16,7 +16,7 @@ public class Talle {
     private Long id;
     private String descripcion;
     @ManyToOne
-    @JoinColumn(name="tipo_talle_id")
+    @JoinColumn(name = "articulo_id", foreignKey = @ForeignKey(name = "FK_TIPOTALLE_ID"))
     private TipoTalle tipoTalle;
 
 }

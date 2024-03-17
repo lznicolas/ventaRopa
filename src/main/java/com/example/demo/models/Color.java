@@ -15,6 +15,8 @@ public class Color {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descripcion;
-
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "articulo_id", foreignKey = @ForeignKey(name = "FK_ARTICULO_ID"))
+    private Articulo articulo;
 
 }

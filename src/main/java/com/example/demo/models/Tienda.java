@@ -19,4 +19,6 @@ public class Tienda {
     private String direccion;
     private Long CUIT;
 
+    public Tienda() {
+    }
 }
