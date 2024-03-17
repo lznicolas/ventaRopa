@@ -61,6 +61,7 @@ public class Articulo {
             fetch = FetchType.LAZY
     )
     private Set<Color> colors;
+    private Stock stock;
 
     public Articulo() {
     }

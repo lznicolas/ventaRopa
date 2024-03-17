@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.example.demo.models.enumeradores.CondiconTributaria;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,26 +10,28 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Cliente extends Persona{
-    private CondicionTributaria condicionTributaria;
+    private CondiconTributaria condiconTributaria;
+
     public Cliente() {
     }
 
-    public Cliente(Integer id, String cuil, String apellido, String nombre, Direccion direccion) {
+    public Cliente(Integer id, String cuil, String apellido, String nombre, Direccion direccion, CondiconTributaria condiconTributaria) {
         super(id, cuil, apellido, nombre, direccion);
+        this.condiconTributaria = condiconTributaria;
     }
 
-    public CondicionTributaria getCondicionTributaria() {
-        return condicionTributaria;
+    public CondiconTributaria getCondiconTributaria() {
+        return condiconTributaria;
     }
 
-    public void setCondicionTributaria(CondicionTributaria condicionTributaria) {
-        this.condicionTributaria = condicionTributaria;
+    public void setCondiconTributaria(CondiconTributaria condiconTributaria) {
+        this.condiconTributaria = condiconTributaria;
     }
 
     @Override
     public String toString() {
         return "Cliente{" +
-                "condicionTributaria=" + condicionTributaria +
+                "condiconTributaria=" + condiconTributaria +
                 '}';
     }
 }
