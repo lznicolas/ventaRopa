@@ -1,0 +1,34 @@
+1- Existe un codigo de barra o uno definido por el usuario.
+	Se podria generar un codigo de barra que sea editable, seria obligatorio que vaya en el 																	constructor? si pero que sea editable.
+2- Se divide en talle de indumentaria y calzado. Cada uno tiene talles y colores. 
+	Recordemos que los talles de la indumentaria no es el mismo que el talle de un calzado. Una remera puede ser marca: Nike color:Azul talle: S y un calzado puede ser marca: Nike color: Azul y talle: 43.
+3- Los articulos se agrupan por "Categoria".
+	Por ejemplo "Calzado deportivo" todas las zapatillas que correspondan a esa categoria. Esta categorizacion depende de la empresa. Esta categoria serviria para la Administracion Fundamentalmente.
+4- Cada articulo corresponde a una marca determinada.
+5- El color es informacion que debe de reutilizarse.
+	Por ejemplo una camisa y una zapatilla azul se deben de relacionar por el color.
+6- *Todos los articulos tienen IVA* 21% pero este valor puede ser modificado, es el unico impuesto que existe (hasta ahora).
+Al Ingresar la mercaderia se indica el *COSTO* (Lo que se le paga al proveedor) del articulo. Este precio es SIN *IVA*.
+Los precios del articulo se definen a partir del COSTO, MARGEN DE GANANCIA Y LOS IMPUESTOS (en este caso solo el IVA).
+	Ejemplo: Total => $100 IVA=>17,36 Neto Gravado=>82,64.
+		Se entiende que el Neto Gravado es el resultado del costo mas un margen de ganancia.
+	Neto grabado: costo+costo*margenGanancia
+	IVA: netoGrabado*porcentajeIVA
+	precioVenta: netoGrabado+PorcentajeIVA
+7- Metodos de Pago: Efectivo y Tarjeta.
+	Tarjeta de cred y deb.
+	Autorizacion de la tarjeta pedirle a Ivan.
+8- Los comprobantes deben informarse digitalmente, para ello es necesario buscar la info de la AFIP.
+Averiguar cual es el monto minimo a partir del cual se debe de informar el nombre de la persona.
+9- Comprobantes, estos depende de la condicion tributaria del cliente
+	Condiciones tributarias existentes: Responsable inscripto, monotributo, exento, no responsable, consumidor final. 
+	Revisar la tabla de comprobantes.
+10- Reglas de negocio: No se aceptan devoluciones a cambio de dinero, sino a cambio de un mismo producto de igual precio o superior siempre y cuando se agregue la diferencia entre ellos.
+Las devoluciones se realizan en un proceso de venta.
+11- Se debera preveer que se cuente con mas de una sucursal en la pcia.
+Cada una con sus terminales de venta correspondientes. Esto permitira que un usuario que este logueado un una terminal no se loguee en otra.
+12- Cada sucursal tiene stock propio de sus articulos. La mercaderia solo llega a la casa central y se lo reparte a las demas sucursales.
+13- Se debera de contar con un sistema de logueo de cada usuario. Los usuarios pueden ser Adminstrativo y Empleado.
+14-El putno de venta tiene asignado un numero por la AFIP.
+--Me quede en el numero de comprobante (factura en el caso del problema)...
+
