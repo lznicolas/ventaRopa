@@ -1,5 +1,8 @@
 package com.example.demo.models;
 
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
@@ -67,7 +70,14 @@ public class CondicionTributaria {
     public void setTipoComprobantes(Set<TipoComprobante> tipoComprobantes) {
         this.tipoComprobantes = tipoComprobantes;
     }
-
+    @PrePersist
+    private void antesDePersistir(){
+        this.fechaAlta = LocalDateTime.now();
+    }
+    @PreUpdate
+    private void antesDeUpdate(){
+        this.fechaModificacion = LocalDateTime.now();
+    }
     @Override
     public String toString() {
         return "CondicionTributaria{" +

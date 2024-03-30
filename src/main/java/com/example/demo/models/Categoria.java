@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,17 +11,27 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "categoria")
 public class Categoria {
     @Id
     @Column(name = "categoria_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
+    @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
+    @Column(name = "numero_categoria")
     private Long nroCategoria;
+    @Column(name = "categoria")
     private String categoria;
-    @JoinColumn(name = "articulo_id", foreignKey = @ForeignKey(name = "FK_ARTICULO_ID"))
-    private Articulo articulo;
+    @JoinColumn(name = "articulo_id")
+    @OneToMany(
+            mappedBy = "categoria",
+            fetch = FetchType.LAZY
+    )
+    @JsonIgnoreProperties({"categoria"})
+    private Set<Articulo> articulos;
 
     public Categoria() {
     }
@@ -71,14 +82,22 @@ public class Categoria {
         this.categoria = categoria;
     }
 
-    public Articulo getArticulo() {
-        return articulo;
+    public Set<Articulo> getArticulos() {
+        return articulos;
     }
 
-    public void setArticulo(Articulo articulo) {
-        this.articulo = articulo;
+    public void setArticulos(Set<Articulo> articulos) {
+        this.articulos = articulos;
     }
 
+    @PrePersist
+    private void antesDePersistir(){
+        this.fechaAlta = LocalDateTime.now();
+    }
+    @PreUpdate
+    private void antesDeUpdate(){
+        this.fechaModificacion = LocalDateTime.now();
+    }
     @Override
     public String toString() {
         return "Categoria{" +
@@ -87,7 +106,7 @@ public class Categoria {
                 ", fechaModificacion=" + fechaModificacion +
                 ", nroCategoria=" + nroCategoria +
                 ", categoria='" + categoria + '\'' +
-                ", articulo=" + articulo +
+                ", articulo=" + articulos +
                 '}';
     }
 

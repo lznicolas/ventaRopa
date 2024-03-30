@@ -7,20 +7,23 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@Table(name = "colores")
 public class Color {
     @Id
     @Column(name = "color_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
+    @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
+    @Column(name = "descripcion")
     private String descripcion;
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "articulo_id", foreignKey = @ForeignKey(name = "FK_ARTICULO_ID"))
-    private Articulo articulo;
-
+    @Column(name = "articulos_color")
+    private Set<Articulo> articulos;
     public Color() {
     }
 
@@ -61,14 +64,22 @@ public class Color {
         this.descripcion = descripcion;
     }
 
-    public Articulo getArticulo() {
-        return articulo;
+    public Set<Articulo> getArticulos() {
+        return articulos;
     }
 
-    public void setArticulo(Articulo articulo) {
-        this.articulo = articulo;
+    public void setArticulos(Set<Articulo> articulos) {
+        this.articulos = articulos;
     }
 
+    @PrePersist
+    private void antesDePersistir(){
+        this.fechaAlta = LocalDateTime.now();
+    }
+    @PreUpdate
+    private void antesDeUpdate(){
+        this.fechaModificacion = LocalDateTime.now();
+    }
     @Override
     public String toString() {
         return "Color{" +
@@ -76,7 +87,6 @@ public class Color {
                 ", fechaAlta=" + fechaAlta +
                 ", fechaModificacion=" + fechaModificacion +
                 ", descripcion='" + descripcion + '\'' +
-                ", articulo=" + articulo +
                 '}';
     }
 

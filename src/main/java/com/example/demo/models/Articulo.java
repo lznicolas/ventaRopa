@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,21 +9,26 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Data
+@Table(name = "articulos")
 public class Articulo {
     @Id
     @Column(name = "articulo_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
+    @Column(name="fecha_modificacion")
     private LocalDateTime fechaModificacion;
+    @Column(name="codigo_articulo")
     private Long codigoArticulo;
+    @Column(name="descripcion")
     private String descripcion;
+    @Column(name="costo")
     private Double costo;
+    @Column(name="marca")
     @ManyToOne
     @JoinColumn(name = "marca_id")
     private Marca marca;
-
 
     private Double margenDeGanancia;
 
@@ -53,20 +59,20 @@ public class Articulo {
             mappedBy = "articulo",
             fetch = FetchType.LAZY
     )
-    private Set<Categoria> categoria;
+    private Categoria categoria;
 
 
     @OneToMany(
             mappedBy = "articulo",
             fetch = FetchType.LAZY
     )
-    private Set<Color> colors;
+    private Color color;
     private Stock stock;
 
     public Articulo() {
     }
 
-    public Articulo(Long id, Long codigoArticulo, String descripcion, Double costo, TipoTalle tipoTalle, Set<Talle> talle, Set<Categoria> categoria, Set<Color> colors) {
+    public Articulo(Long id, Long codigoArticulo, String descripcion, Double costo, TipoTalle tipoTalle, Set<Talle> talle, Categoria categoria, Color color) {
         this.id = id;
         this.codigoArticulo = codigoArticulo;
         this.descripcion = descripcion;
@@ -74,7 +80,7 @@ public class Articulo {
         this.tipoTalle = tipoTalle;
         this.talle = talle;
         this.categoria = categoria;
-        this.colors = colors;
+        this.color = color;
     }
 
     public Long getId() {
@@ -181,22 +187,38 @@ public class Articulo {
         this.talle = talle;
     }
 
-    public Set<Categoria> getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Set<Categoria> categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
-    public Set<Color> getColors() {
-        return colors;
+    public Color getColor() {
+        return color;
     }
 
-    public void setColors(Set<Color> colors) {
-        this.colors = colors;
+    public void setColor(Color color) {
+        this.color = color;
     }
 
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
+    }
+
+    @PrePersist
+    private void antesDePersistir(){
+        this.fechaAlta = LocalDateTime.now();
+    }
+    @PreUpdate
+    private void antesDeUpdate(){
+        this.fechaModificacion = LocalDateTime.now();
+    }
     @Override
     public String toString() {
         return "Articulo{" +
@@ -214,7 +236,7 @@ public class Articulo {
                 ", tipoTalle=" + tipoTalle +
                 ", talle=" + talle +
                 ", categoria=" + categoria +
-                ", colors=" + colors +
+                ", color=" + color +
                 '}';
     }
 
@@ -228,6 +250,6 @@ public class Articulo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, codigoArticulo);
+        return Objects.hash(id);
     }
 }

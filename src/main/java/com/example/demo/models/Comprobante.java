@@ -1,5 +1,8 @@
 package com.example.demo.models;
 
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -37,7 +40,10 @@ public class Comprobante {
     public void setTipoComprobante(TipoComprobante tipoComprobante) {
         this.tipoComprobante = tipoComprobante;
     }
-
+    @PrePersist
+    private void antesDePersistir(){
+        this.fechaAlta = LocalDateTime.now();
+    }
     @Override
     public String toString() {
         return "Comprobante{" +
