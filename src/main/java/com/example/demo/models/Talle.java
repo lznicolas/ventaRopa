@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Talle {
@@ -14,20 +15,23 @@ public class Talle {
     @Column(name = "talle_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
+    @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
+    @Column(name = "descripcion")
     private String descripcion;
     @ManyToOne
     @JoinColumn(name = "articulo_id", foreignKey = @ForeignKey(name = "FK_TIPOTALLE_ID"))
     private TipoTalle tipoTalle;
+    private Set<Articulo> articulos;
 
     public Talle() {
     }
 
-    public Talle(Long id, String descripcion, TipoTalle tipoTalle) {
+    public Talle(Long id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;
-        this.tipoTalle = tipoTalle;
     }
 
     public Long getId() {

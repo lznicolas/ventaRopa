@@ -26,8 +26,10 @@ public class Articulo {
     @Column(name="costo")
     private Double costo;
     @Column(name="marca")
-    @ManyToOne
-    @JoinColumn(name = "marca_id")
+    @OneToMany(
+            mappedBy = "articulos",
+            fetch = FetchType.LAZY
+    )
     private Marca marca;
 
     private Double margenDeGanancia;
