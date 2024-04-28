@@ -31,16 +31,14 @@ public class Articulo {
             fetch = FetchType.LAZY
     )
     private Marca marca;
-
+    @Column(name = "margen_ganancia")
     private Double margenDeGanancia;
 
-
+    @Column(name = "neto_grabado")
     private Double netoGrabado;
-
-
+    @Column(name = "impuesto_valor_agregado")
     private Double impuestoValorAgregado;
-
-
+    @Column(name = "precio_venta")
     private Double precioDeVenta;
 
     /*@OneToMany(
@@ -57,18 +55,33 @@ public class Articulo {
     private Set<Talle> talle;
 
 
-    @OneToMany(
-            mappedBy = "articulo",
-            fetch = FetchType.LAZY
+    @ManyToOne(
+            optional = true,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }
+    )
+    @JoinColumn(
+            name = "categoria_id",
+            foreignKey = @ForeignKey(name = "FK_CATEGORIA_ID")
     )
     private Categoria categoria;
 
 
-    @OneToMany(
-            mappedBy = "articulo",
-            fetch = FetchType.LAZY
+    @ManyToOne(
+            optional = true,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }
+    )
+    @JoinColumn(
+            name = "color_id",
+            foreignKey = @ForeignKey(name = "FK_COLOR_ID")
     )
     private Color color;
+    @Column(name = "stock")
     private Stock stock;
 
     public Articulo() {

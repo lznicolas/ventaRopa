@@ -22,6 +22,11 @@ public class Color {
     private LocalDateTime fechaModificacion;
     @Column(name = "descripcion")
     private String descripcion;
+    @OneToMany(
+            mappedBy = "articulo",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
     @Column(name = "articulos_color")
     private Set<Articulo> articulos;
     public Color() {

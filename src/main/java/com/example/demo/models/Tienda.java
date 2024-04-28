@@ -10,17 +10,25 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "tiendas")
 public class Tienda {
     @Id
     @Column(name = "tienda_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
+    @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "numero_telefono")
     private String nroDeTelefono;
+    @Column(name = "direccion")
     private Direccion direccion;
+    @Column(name = "cuit")
     private Long CUIT;
+
     private Set<Sucursal> sucursals;
 
     public Tienda() {
